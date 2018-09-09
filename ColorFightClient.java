@@ -234,8 +234,12 @@ public class ColorFightClient {
     }
 
     public void refresh() {
+        refresh(false);
+    }
+
+    public void refresh(boolean forceCompleteRefresh) {
         JSONObject requestData = new JSONObject();
-        if (lastUpdateTime < 0) {
+        if (lastUpdateTime < 0 || forceCompleteRefresh) {
             LOGGER.info("Doing complete refresh");
             requestData.put("protocol", PORTOCOL_COMPLETE_REFRESH);
 
