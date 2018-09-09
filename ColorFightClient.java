@@ -404,4 +404,17 @@ public class ColorFightClient {
             return new ColorFightCell(new JSONObject("{\"o\": -1}"));
         }
     }
+
+    public void sleep(long millisecond) {
+        try {
+            Thread.sleep(millisecond);
+        } catch (InterruptedException e) {
+            LOGGER.warning("Program interrupted. Exiting...");
+            // Because we converted InterruptedException to RuntimeException,
+            // we should restore the flag to notify other part of the program about this interruption
+            // so that the program can still respond to this signal.
+            Thread.currentThread().interrupt();
+            throw new RuntimeException();
+        }
+    }
 }
