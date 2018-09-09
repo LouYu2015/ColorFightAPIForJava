@@ -3,27 +3,26 @@ public class Main {
     public static void main(String[] args) {
         ColorFightClient game = new ColorFightClient();
         // game.enableDebugMode();
+        // game.clearToken();
 
-        game.joinGame("louyu");
+        game.joinGame("louyu5");
+        double loopUpdateTime = 0;
+
         while(true) {
             for (ColorFightCell cell: game.cellInfo) {
+
                 int x = cell.getX(), y = cell.getY();
 
-                if (game.canAttack(x, y)) {
+                if (game.canAttack(x, y, loopUpdateTime)) {
                     game.attackCell(x, y);
-
-                    try {
-                        Thread.sleep((long) (cell.getTakeTime() * 1000 + 500));
-                    } catch (InterruptedException e) {}
-
+                    game.sleep((long)cell.getTakeTime() * 1000);
                     game.refresh();
                 }
             }
 
             game.LOGGER.info("Scanned all cells.");
-            try {
-                Thread.sleep((long) (1000));
-            } catch (InterruptedException e) {}
+            game.refresh();
+            loopUpdateTime = game.getLastUpdateTime();
         }
     }
 }
