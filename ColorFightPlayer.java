@@ -15,12 +15,12 @@ public class ColorFightPlayer {
         return userData.getString("name");
     }
 
-    public float getCDTime() {
-        return userData.getFloat("cd_time");
+    public double getCDTime() {
+        return userData.getDouble("cd_time");
     }
 
-    public float getBuildCDTime() {
-        return userData.getFloat("build_cd_time");
+    public double getBuildCDTime() {
+        return userData.getDouble("build_cd_time");
     }
 
     public int getCellNum() {
@@ -39,12 +39,12 @@ public class ColorFightPlayer {
         return userData.getInt("energy_cell_num");
     }
 
-    public float getEnergy() {
-        return userData.getFloat("energy");
+    public double getEnergy() {
+        return userData.getDouble("energy");
     }
 
-    public float getGold() {
-        return userData.getFloat("gold");
+    public double getGold() {
+        return userData.getDouble("gold");
     }
 
     public String toString() {

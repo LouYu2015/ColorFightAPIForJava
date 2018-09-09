@@ -22,7 +22,7 @@ public class ColorFightClient {
     private int uid; // Players' User ID
     private JSONObject gameInfo; // Game information
     public List<ColorFightCell> cellInfo; // Cell information
-    private float lastUpdateTime = -1; // Timestamp of last refresh
+    private double lastUpdateTime = -1; // Timestamp of last refresh
 
     public final String SERVER_URL; // Server url
     public final Logger LOGGER; // Log handler
@@ -294,11 +294,11 @@ public class ColorFightClient {
         cellInfo.set(getCID(x, y), data);
     }
 
-    public static float calculateTakeTime(float timeDiff) {
+    public static double calculateTakeTime(double timeDiff) {
         if (timeDiff <= 0) {
             return 33;
         } else {
-            return (float)(30*(Math.pow(2, -timeDiff/30.0)) + 3);
+            return 30*(Math.pow(2, -timeDiff/30.0)) + 3;
         }
     }
 
@@ -309,7 +309,7 @@ public class ColorFightClient {
             } else if (currentCell.getOwnerUID() == 0) {
                 currentCell.setTakeTime(2);
             } else {
-                float timeDiff = getLastUpdateTime() - currentCell.getOccupyTime();
+                double timeDiff = getLastUpdateTime() - currentCell.getOccupyTime();
                 currentCell.setTakeTime(calculateTakeTime(timeDiff));
             }
         }
@@ -384,16 +384,16 @@ public class ColorFightClient {
         return gameInfo.getInt("height");
     }
 
-    public float getLastUpdateTime() {
-        return gameInfo.getFloat("time");
+    public double getLastUpdateTime() {
+        return gameInfo.getDouble("time");
     }
 
-    public float getEndTime() {
-        return gameInfo.getFloat("end_time");
+    public double getEndTime() {
+        return gameInfo.getDouble("end_time");
     }
 
-    public float joinEndTime() {
-        return gameInfo.getFloat("join_end_time");
+    public double joinEndTime() {
+        return gameInfo.getDouble("join_end_time");
     }
 
     public int getGameID() {

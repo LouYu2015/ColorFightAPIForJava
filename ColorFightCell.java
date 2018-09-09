@@ -35,24 +35,24 @@ public class ColorFightCell {
         return cellData.getInt("y");
     }
 
-    public float getOccupyTime() {
-        return cellData.getFloat("ot");
+    public double getOccupyTime() {
+        return cellData.getDouble("ot");
     }
 
-    public float getAttackTime() {
-        return cellData.getFloat("at");
+    public double getAttackTime() {
+        return cellData.getDouble("at");
     }
 
-    public float getTakeTime() {
-        return cellData.getFloat("t");
+    public double getTakeTime() {
+        return cellData.getDouble("t");
     }
 
-    public void setTakeTime(float takeTime) {
+    public void setTakeTime(double takeTime) {
         cellData.put("t", takeTime);
     }
 
-    public float getFinishTime() {
-        return cellData.getFloat("f");
+    public double getFinishTime() {
+        return cellData.getDouble("f");
     }
 
     public String getCellType() {
@@ -71,8 +71,8 @@ public class ColorFightCell {
         return !cellData.getBoolean("bf");
     }
 
-    public float getBuildTime() {
-        return cellData.getFloat("bt");
+    public double getBuildTime() {
+        return cellData.getDouble("bt");
     }
 
     public String toString() {
