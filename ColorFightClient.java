@@ -158,7 +158,7 @@ public class ColorFightClient {
             JSONObject response = new JSONObject(strResponse);
 
             // Check error code
-            if (response.has("err_code")) {
+            if (response.has("err_code") && response.getInt("err_code") != 0) {
                 LOGGER.severe("Server responded game error code: " + response.getInt("err_code"));
                 if (response.has("err_msg")) {
                     LOGGER.severe("Error message is: " + response.getString("err_msg"));
