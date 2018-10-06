@@ -60,7 +60,7 @@ public class ColorFightClient {
     }
 
     public ColorFightClient() {
-        this("http://colorfight.herokuapp.com/");
+        this("http://colorfightuw.herokuapp.com/");
     }
 
     private void loadToken() {
