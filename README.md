@@ -14,9 +14,9 @@ This package is dependent with `org.json`. You need to include `org.json` in you
     * run program: `java -cp "<path to jar>"  Main`
 * If you are using an IDE, add the jar file to project dependencies(For example, for IntelliJ, `File >> Project Structure >> Project Settings >> Modules >> Denpendencies >> <the plus icon> >> JARs or directories`).
 
-## Project structure
+## Project Structure
 
-### Code files
+### Code Files
 
 * `Main.java`: example AI.
 * `ColorFightClient.java`: game client.
@@ -24,7 +24,7 @@ This package is dependent with `org.json`. You need to include `org.json` in you
 * `ColorFightCell.java`: a class that provide cell information.
 * `BlastDirection.java`: a class that is used to specify a direction in blast action.
 
-### Other files
+### Other Files
 
 * `README.md`: documentation.
 * `LICESE.txt`: license.
@@ -34,7 +34,7 @@ This package is dependent with `org.json`. You need to include `org.json` in you
 * `configuration.txt`: player's token.
 
 
-## Join game
+## Join Game
 
 Use `ColorFightClient game = new ColorFightClient()` to creat a new client. If you want to change server URL, pass the URL as a parameter.
 
@@ -50,7 +50,7 @@ Logs will be save in `logging.xml`. If you open the log file in Firefox, it will
 
 **Note: when you start the program again, previous logs will be overrided and lost.**
 
-### Adding to log
+### Adding to Log
 
 Use the following method to add your own log:
 
@@ -59,13 +59,57 @@ Use the following method to add your own log:
 * `game.LOGGER.info(message)`: log some information
 * `game.LOGGER.fine(message)`: log some information that can be ignored
 
-### Turn on or turn off logging
+### Turn On or Turn Off Logging
 
 You can easily controll what level of details to keep without commenting out any codes:
 
 * Use `game.enableDebugMode()` to show and save detailed logs for the client. After that, `game.LOGGER.fine` won't be ignored.  (**note that this may fill up your disk quickly!**).
 * Use `game.disableLogging()` to turn off logging for the client. After that, all logs will be ignored.
 
-## Basic actions
+## Reading Game Status
+
+* `game.refresh()`: get latest information from server. **Remember to call this after each action, or your will get outdated information!**
+
+### Reading General Information
+
+* `game.uid`: your user ID.
+* `game.getGameID()`: ID for this game.
+* `game.getEndTime()`: timestamp for the time when the game will end. 0 means no limit.
+* `game.getJoinEndTime()`: timestamp for the time when the game will stop accepting new player. 0 means no limit.
+* `game.getWidth()`: width of game board.
+* `game.getHeight()`: height of game borad.
+* `game.getLastUpdateTime()`: timestamp for the last time that the client fetch information from server.
+
+### Reading the Game Board
+
+* `game.cellInfo`: an array of all cells on the board. See also: `ColorFightCell`.
+* `game.getCell(x, y)`: get the cell at coordinate (x, y). Origin is at upper-left corner of the board. See also: `ColorFightCell`.
+* `game.canAttack(x, y)`: return whether you can attack this cell.
+
+###  Reading Player's Information
+ 
+* `game.myInfo`: get my information. See also: `ColorFightPlayer`.
+* `game.otherPlayerInfo`: an array of other players. See also: `ColorFightPlayer`.
+ 
+### `ColorFightCell`
+
+* `cell.getOwnerID()`: user ID of owner.
+* `cell.getCellType()`: name of cell's type. May contain the following values:
+    * `"normal"`: this is an ordinary cell.
+    * `"gold"`: this is golden cell.
+    * `"energy"`: this is energy cell.
+* `cell.isEmpty()`: return true if this cell has owner.
+* `cell.isEdge()`: return true if this cell is out of the boundary.
+* `cell.isBuilding()`: return true if there is a building on this cell.
+* `cell.isBase()`: return true if this building is a base.
+* `cell.getBuildType()`: name of building's type.
+* `cell.getBuildTime()`: timestamp when building on this cell was built.
+* `cell.isTaking()`: return true if this cell is under attacked.
+* `cell.getFinishTime()`: timestamp when attack will finish.  ** Don't use if the cell is not under attack**.
+* `cell.getAttackerUID()`: user id of attacker. ** Don't use if the cell is not under attack**.
+* `cell.getOccupyTime()`: timestamp when cell is occupied by current owner.
+* `cell.getTakeTime()`: time to spend if you attack this cell. Unit: second.
+
+### `ColorFightPlayer`
 
 To be continued...
