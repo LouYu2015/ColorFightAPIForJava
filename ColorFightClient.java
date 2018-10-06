@@ -392,7 +392,7 @@ public class ColorFightClient {
         return gameInfo.getDouble("end_time");
     }
 
-    public double joinEndTime() {
+    public double getJoinEndTime() {
         return gameInfo.getDouble("join_end_time");
     }
 
