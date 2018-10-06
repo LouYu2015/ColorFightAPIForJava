@@ -1,4 +1,4 @@
 logging.xml
 *.class
 configuration.txt
-
+.idea/
