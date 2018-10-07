@@ -33,6 +33,15 @@ This package is dependent with `org.json`. You need to include `org.json` in you
 * `logging.xml`: log file.
 * `configuration.txt`: player's token.
 
+## Notes
+
+You can watch the game in web browser at the server's URL (by default, [https://colorfightuw.herokuapp.com/]()).
+
+Coordinate's origin is at upper-left corner of the board.
+
+Unit of time is seconds in all places, except `game.sleep()`.
+
+For game rules,  see [https://colorfight.cssauw.org/]().
 
 ## Join Game
 
@@ -83,7 +92,7 @@ You can easily controll what level of details to keep without commenting out any
 ### Reading the Game Board
 
 * `game.cellInfo`: an array of all cells on the board. See also: `ColorFightCell`.
-* `game.getCell(x, y)`: get the cell at coordinate (x, y). Origin is at upper-left corner of the board. See also: `ColorFightCell`.
+* `game.getCell(x, y)`: get the cell at coordinate (x, y). See also: `ColorFightCell`.
 * `game.canAttack(x, y)`: return whether you can attack this cell.
 
 ###  Reading Player's Information
@@ -93,7 +102,9 @@ You can easily controll what level of details to keep without commenting out any
  
 ### `ColorFightCell`
 
-* `cell.getOwnerID()`: user ID of owner.
+* `cell.getX()`: x coordinate.
+* `cell.getY()`: y coordinate.
+* `cell.getOwnerUID()`: user ID of owner.
 * `cell.getCellType()`: name of cell's type. May contain the following values:
     * `"normal"`: this is an ordinary cell.
     * `"gold"`: this is golden cell.
@@ -109,7 +120,33 @@ You can easily controll what level of details to keep without commenting out any
 * `cell.getAttackerUID()`: user id of attacker. ** Don't use if the cell is not under attack**.
 * `cell.getOccupyTime()`: timestamp when cell is occupied by current owner.
 * `cell.getTakeTime()`: time to spend if you attack this cell. Unit: second.
+* `cell.toString()`: description of this cell.
 
 ### `ColorFightPlayer`
 
-To be continued...
+* `player.getID()`: user ID.
+* `player.getName()`: user name.
+* `player.getCDTime()`: timestamp when this player can take next action.
+* `player.getCellNum()`: number of cells occupied by this player.
+* `player.getBaseNum()`: number of bases that this player owns.
+* `player.getEnergyCellNum()`: number of energy cells that this player occupies.
+* `player.getGoldCellNum()`: number of gold cells that this player occupies.
+* `player.getGold()`: amount of gold that this player holds.
+* `player.getEnergy()`: amount of energy that this player has.
+* `player.toString()`: discription of this player.
+
+## Actions
+
+* `game.attackCell(x, y)`: attack cell at coordinate (x, y). It must be next to a cell that you owns.
+* `game.attackCell(x, y, boost)`: attack cell. if boost is true, use 15 energy to boost this attack. This attack's time cost will be `max(1, x/4)` after boost, where `x` is the time cost before boost.
+* `game.buildBase(x, y)`: build a base on cell.
+* `game.blast(x, y, direction)`: start an explosion centered at (x, y). An explosion takes 1 seconds and costs 30 energy. It will force every cell in the explosion area to lost its owner and become empty cell, except your own cells. `direction` can be:
+    * `BlastDirection.SQUARE`: set explosion area to a 3 * 3 square
+    * `BlastDirection.VERTICAL`: set explosion area to 9 cells in a vertical colomn.
+    * `BlastDirection.HORIZENTAL`: set explosion area to 9 cells in a horizental row.
+* `game.multiAttack(x, y)`: attack 4 cells directly next to (x, y)(vertically and horizentally). All attack will take place simultimiously, but only cells next to your cell can be attacked. You can take next action only after all attack finished.
+
+## Other Methods
+
+* `game.setPassword(password)`: tell the client to use password when joining the game. Should be called before `game.joinGame()`
+* `game.sleep(time)`: wait some time. You can use it to wait for current action to end. ** Unit of `time` is milliseconds(0.001 second) instead of second. **
