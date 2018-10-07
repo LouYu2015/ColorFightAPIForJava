@@ -12,7 +12,9 @@ This package is dependent with `org.json`. You need to include `org.json` in you
 * If you put the jar file in a different directory, use the following comand(fill in `<path to jar>`):
     * compile: `javac -cp "<path to jar>"  Main.java`
     * run program: `java -cp "<path to jar>"  Main`
-* If you are using an IDE, add the jar file to project dependencies(For example, for IntelliJ, `File >> Project Structure >> Project Settings >> Modules >> Denpendencies >> <the plus icon> >> JARs or directories`).
+* If you are using an IDE, add the jar file to project dependencies:
+    * For IntelliJ, `File >> Project Structure >> Project Settings >> Modules >> Denpendencies >> <the plus icon> >> JARs or directories`.
+    * For Eclipse, right click on the jar file, select `Build Path >> Add To Builds Path`
 
 ## Project Structure
 
