@@ -35,13 +35,13 @@ This package is dependent with `org.json`. You need to include `org.json` in you
 
 ## Notes
 
-You can watch the game in web browser at the server's URL (by default, [https://colorfightuw.herokuapp.com/]()).
+You can watch the game in web browser at the server's URL (by default, [https://colorfightuw.herokuapp.com/](https://colorfightuw.herokuapp.com/)).
 
 Coordinate's origin is at upper-left corner of the board.
 
 Unit of time is seconds in all places, except `game.sleep()`.
 
-For game rules,  see [https://colorfight.cssauw.org/]().
+For game rules,  see [https://colorfight.cssauw.org/](https://colorfight.cssauw.org/).
 
 ## Join Game
 
