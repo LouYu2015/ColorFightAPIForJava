@@ -355,10 +355,6 @@ public class ColorFightClient {
     }
 
     public boolean canAttack(int x, int y) {
-        return canAttack(x, y, 0);
-    }
-
-    public boolean canAttack(int x, int y, double timeFilter) {
         int[][] directions = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
 
         ColorFightCell currentCell = getCell(x, y);
@@ -368,8 +364,7 @@ public class ColorFightClient {
 
         for (int[] direction: directions) {
             ColorFightCell nextCell = getCell(x + direction[0], y + direction[1]);
-            if (nextCell.getOwnerUID() == uid
-                    && nextCell.getAttackTime() < timeFilter) {
+            if (nextCell.getOwnerUID() == uid) {
                 return true;
             }
         }
